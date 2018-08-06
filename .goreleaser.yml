@@ -4,7 +4,6 @@ release:
     owner: centrifugal
     name: centrifugo
   name_template: '{{.Tag}}'
-  draft: true
   prerelease: true
 brew:
   github:
@@ -42,13 +41,8 @@ archive:
     }}v{{ .Arm }}{{ end }}'
   format: tar.gz
   files:
-  - licence*
-  - LICENCE*
-  - license*
   - LICENSE*
-  - readme*
   - README*
-  - changelog*
   - CHANGELOG*
   format_overrides:
     - goos: windows
