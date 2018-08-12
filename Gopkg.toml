@@ -83,3 +83,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+  root-package = "github.com/prhineh1/panurge"
+  go-version = "1.10.3"
