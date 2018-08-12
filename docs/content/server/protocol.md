@@ -423,3 +423,15 @@ Every time client disconnects from server it must call unsubscribe handlers for 
 Client must periodically (once in 25 secs, configurable) send ping messages to server. If pong has not beed received in 5 secs (configurable) then client must disconnect from server and try to reconnect with backoff strategy.
 
 Client can automatically batch several requests into one frame to server and also must be able to handle several replies received from server in one frame.
+
+### Important client scenarios
+
+* Client must survive server reload and internet connection lost. In this case client must try to reconnect with exponentioal backoff strategy
+* Client should handle disconnect reason. In case of Websocket it is sent by server in CLOSE Websocket frame. This is a string containing JSON object with fields: `reason` (string) and `reconnect` (bool). Client should give users access to these fields in disconnect event and automatically follow `reconnect` advice
+* Client must send periodic `ping` commands to server and thus detect broken connection. If no ping reply received from server in configured window reconnect workflow must be initiated
+* Client should fully reconnect if subscription request timed out. Timeout can be configured by client library users
+* Client should automatically recover messages and set appropriate fields in subscribe event context. Two important fields are `recovered` and `isResubscribe`. First field let user know what server thinks about subscription state - were all messages recovered or not. The second field must only be true if resubscribe was caused by temporary network connection lost. If user initiated resubscribe himself (calling `unsubscribe` method and then `subscribe` method) then recover workflow should not be used and `isResubscribe` must be `false`. Of cause fields in subscribe event context can have different names depending on programmer's taste and language style guide
+* Client should work both with Centrifugo and Centrifuge library based server
+* Client must have a method to set connection token
+* Client should support connection token refresh mechanism
+* Client should support private channel subscriptions and private subscription token refresh mechanism
