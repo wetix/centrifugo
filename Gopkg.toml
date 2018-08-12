@@ -85,5 +85,5 @@
   unused-packages = true
 
 [metadata.heroku]
-  root-package = "github.com/prhineh1/panurge"
+  root-package = "github.com/centrifugal/centrifugo"
   go-version = "1.10.3"
