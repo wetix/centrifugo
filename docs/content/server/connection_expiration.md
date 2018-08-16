@@ -8,7 +8,7 @@ So first you should do is enable client expiration mechanism in Centrifugo provi
 import jwt
 import time
 
-token = jwt.encode({"user": "42", "exp": int(time.time()) + 10*60}, "secret").decode()
+token = jwt.encode({"sub": "42", "exp": int(time.time()) + 10*60}, "secret").decode()
 
 print(token)
 ```
@@ -25,7 +25,7 @@ For example Javascript browser client  will send AJAX POST request to your appli
 }
 ```
 
-So you must just return the same connection token for `user` when rendering page initially. But with actual `exp`. Javascript client will then send them to Centrifugo server and connection will be refreshed for a time you set in `exp`.
+So you must just return the same connection token for your user when rendering page initially. But with actual valid `exp`. Javascript client will then send them to Centrifugo server and connection will be refreshed for a time you set in `exp`.
 
 In this case you know which user want to refresh its connection because this is just a general request to your app - so your session mechanism will tell you about the user.
 

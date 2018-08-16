@@ -10,13 +10,13 @@ We will use Javascript Centrifugo client here for example snippets for client si
 
 ## Claims
 
-Credential claims are: `user`, `exp`, `info` and `b64info`. What do they mean? Let's describe in detail.
+Centrifugo uses the following claims in JWT: `sub`, `exp`, `info` and `b64info`. What do they mean? Let's describe in detail.
 
-### user
+### sub
 
-This is simple - it's an ID of current application user (**as string**). 
+This is a standard JWT claim which must contain an ID of current application user (**as string**). 
 
-If your user not currently authenticated in your application but you want to let him connect to Centrifugo anyway you can use empty string as user ID. This is called anonymous access. In this case `anonymous` option must be enabled in Centrifugo configuration for channels that client will subscribe to.
+If your user is not currently authenticated in your application but you want to let him connect to Centrifugo anyway you can use empty string as user ID in this `sub` claim. This is called anonymous access. In this case `anonymous` option must be enabled in Centrifugo configuration for channels that client will subscribe to.
 
 ### exp
 
@@ -49,7 +49,7 @@ Let's look how to generate connection JWT in Python:
 ```python
 import jwt
 
-token = jwt.encode({"user": "42"}, "secret").decode()
+token = jwt.encode({"sub": "42"}, "secret").decode()
 
 print(token)
 ```
@@ -72,7 +72,7 @@ Token that will be valid for 5 minutes:
 import jwt
 import time
 
-token = jwt.encode({"user": "42", "exp": int(time.time()) + 5*60}, "secret", algorithm="HS256").decode()
+token = jwt.encode({"sub": "42", "exp": int(time.time()) + 5*60}, "secret", algorithm="HS256").decode()
 
 print(token)
 ```
@@ -82,7 +82,7 @@ print(token)
 ```python
 import jwt
 
-token = jwt.encode({"user": "42", "info": {"name": "Alexander Emelin"}}, "secret", algorithm="HS256").decode()
+token = jwt.encode({"sub": "42", "info": {"name": "Alexander Emelin"}}, "secret", algorithm="HS256").decode()
 
 print(token)
 ```
