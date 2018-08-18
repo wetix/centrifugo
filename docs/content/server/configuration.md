@@ -75,7 +75,7 @@ This is a minimal Centrifugo configuration file:
 }
 ```
 
-The only field that is required is **secret**. Secret used to create HMAC signs. Keep it strong and in secret!
+The only field that is required is **secret**. Secret used to check JWT signature (more about JWT later). Keep it strong and in secret as its name says.
 
 ### TOML file
 
@@ -92,7 +92,7 @@ secret = "secret"
 log_level = "debug"
 ```
 
-I.e. the same configuration as JSON file above. We will talk about what is `namespaces` field soon.
+I.e. the same configuration as JSON file above with one extra option.
 
 ### YAML file
 
@@ -137,25 +137,25 @@ Note that some options can be set via command-line. Command-line options are mor
 
 ### Channel options
 
-Let's look on options related to channels. Channel is an entity to which clients can subscribe to receive messages published into that channel. Channel is just a string (several symbols has special meaning in Centrifugo - see [special chapter](channels) to find more information about channels). The following options will affect channel behaviour:
+Let's look at options related to channels. Channel is an entity to which clients can subscribe to receive messages published into that channel. Channel is just a string (several symbols has special meaning in Centrifugo - see [special chapter](channels) to find more information about channels). The following options will affect channel behaviour:
 
-* `publish` – allow clients to publish messages into channels directly (from client side). Your application will never receive those messages. In idiomatic case all messages must be published to Centrifugo by your application backend using Centrifugo API. But this option can be useful when you want to build something without backend-side validation and saving into database. This option can also be useful for demos and prototyping real-time ideas. Note that client can only publish data into channel after successfully subscribed on it. By default it's `false`.
+* `publish` – allow clients to publish messages into channels directly (from client side). Your application will never receive those messages. In idiomatic case all messages must be published to Centrifugo by your application backend using Centrifugo API. But this option can be useful when you want to build something without backend-side validation and saving into database. This option can also be useful for demos and prototyping real-time ideas. By default it's `false`.
 
-* `subscribe_to_publish` - when `publish` option enabled client can publish into channel without beong subscribed to it. This option enables automatic check that client subscribed on channel before allowing client to publish into channel.
+* `subscribe_to_publish` - when `publish` option enabled client can publish into channel without being subscribed to it. This option enables automatic check that client subscribed on channel before allowing client to publish into channel.
 
-* `anonymous` – this option enables anonymous access (with empty `user` ID in connection token). In most situations your application works with authorized users so every user has its own unique id. But if you provide real-time features for public access you may need unauthorized access to some channels. Turn on this option and use empty string as user ID. By default `false`.
+* `anonymous` – this option enables anonymous access (with empty `sub` claim in connection token). In most situations your application works with authenticated users so every user has its own unique id. But if you provide real-time features for public access you may need unauthorized access to some channels. Turn on this option and use empty string as user ID. By default `false`.
 
-* `presence` – enable/disable presence information. Presence is a structure with clients currently subscribed on channel. By default `false` – i.e. no presence information will be available for channels.
+* `presence` – enable/disable presence information. Presence is an information about clients currently subscribed on channel. By default `false` – i.e. no presence information will be available for channels.
 
 * `join_leave` – enable/disable sending join(leave) messages when client subscribes on channel (unsubscribes from channel). By default `false`.
 
-* `history_size` – history size (amount of messages) for channels. As Centrifugo keeps all history messages in memory it's very important to limit maximum amount of messages in channel history to reasonable minimum. By default history size is `0` - this means that channels will have no history messages at all. As soon as history enabled then `history_size` defines maximum amount of messages that Centrifugo will keep for **each** channel in namespace during history lifetime (see below).
+* `history_size` – history size (amount of messages) for channels. As Centrifugo keeps all history messages in memory it's very important to limit maximum amount of messages in channel history to reasonable value. `history_size` defines maximum amount of messages that Centrifugo will keep for **each** channel in namespace during history lifetime (see below). By default history size is `0` - this means that channels will have no history messages at all.
 
-* `history_lifetime` – interval in seconds how long to keep channel history messages. As all history is storing in memory it is also very important to get rid of old history data for unused (inactive for a long time) channels. By default history lifetime is `0` – this means that channels will have no history messages at all. **So to get history messages you should wisely configure both `history_size` and `history_lifetime` options**.
+* `history_lifetime` – interval in seconds how long to keep channel history messages. As all history is storing in memory it is also very important to get rid of old history data for unused (inactive for a long time) channels. By default history lifetime is `0` – this means that channels will have no history messages at all. **So to turn on keeping history messages you should wisely configure both `history_size` and `history_lifetime` options**.
 
-* `history_recover` (**new in v1.2.0**) – boolean option, when enabled Centrifugo will try to recover missed messages published while client was disconnected for some reason (bad internet connection for example). By default `false`. This option must be used in conjunction with reasonably configured message history for channel i.e. `history_size` and `history_lifetime` **must be set** (because Centrifugo uses channel message history to recover messages). Also note that note all real-time events require this feature turned on so think wisely when you need this. See more details about how this option works in [special chapter](recover.md).
+* `history_recover` – boolean option, when enabled Centrifugo will try to recover missed messages published while client was disconnected for some reason (bad internet connection for example). By default `false`. This option must be used in conjunction with reasonably configured message history for channel i.e. `history_size` and `history_lifetime` **must be set** (because Centrifugo uses channel message history to recover messages). Also note that not all real-time events require this feature turned on so think wisely when you need this. See more details about how this option works in [special chapter](recover.md).
 
-* `history_drop_inactive` (**new in v1.3.0**) – boolean option, allows to drastically reduce resource usage (engine memory usage, messages travelling around) when you use message history for channels. In couple of words when enabled Centrifugo will drop history messages that no one needs. Please, see [issue on Github](https://github.com/centrifugal/centrifugo/issues/50) to get more information about option use case scenario and edge cases it involves.
+* `history_drop_inactive` – boolean option, allows to drastically reduce resource usage (engine memory usage, messages travelling around) when you use message history for channels. In couple of words when enabled Centrifugo will drop history messages that no one needs. Please, see [issue on Github](https://github.com/centrifugal/centrifugo/issues/50) to get more information about option use case scenario and edge cases it involves.
 
 Let's look how to set some of these options in config:
 
