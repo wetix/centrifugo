@@ -312,8 +312,7 @@ func (c *Client) Unsubscribe(ch string, resubscribe bool) error {
 	if err != nil {
 		return err
 	}
-	c.sendUnsub(ch, resubscribe)
-	return nil
+	return c.sendUnsub(ch, resubscribe)
 }
 
 func (c *Client) sendUnsub(ch string, resubscribe bool) error {
@@ -507,6 +506,13 @@ func (c *Client) handle(command *proto.Command) (*proto.Reply, *Disconnect) {
 }
 
 func (c *Client) expire() {
+
+	c.mu.RLock()
+	closed := c.closed
+	c.mu.RUnlock()
+	if closed {
+		return
+	}
 
 	if c.eventHub.refreshHandler != nil {
 		reply := c.eventHub.refreshHandler(RefreshEvent{})
@@ -1383,6 +1389,11 @@ func (c *Client) subscribeCmd(cmd *proto.SubscribeRequest) (*proto.SubscribeResp
 					res.Recovered = found || (time.Duration(cmd.Away)*time.Second+time.Second < time.Duration(chOpts.HistoryLifetime)*time.Second && len(publications) < chOpts.HistorySize)
 				}
 			}
+			recoveredLabel := "no"
+			if res.Recovered {
+				recoveredLabel = "yes"
+			}
+			recoverCount.WithLabelValues(recoveredLabel).Inc()
 		} else {
 			// Client don't want to recover messages yet (fresh connect), we just return last
 			// publication uid here so it could recover later.

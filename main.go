@@ -153,11 +153,11 @@ func main() {
 				log.Fatal().Msgf("Error running node: %v", err)
 			}
 
-			log.Info().Msgf("Starting Centrifugo %s", VERSION)
-			log.Info().Msgf("Config path: %s", absConfPath)
-			log.Info().Msgf("PID: %d", os.Getpid())
-			log.Info().Msgf("Engine: %s", strings.ToTitle(engineName))
-			log.Info().Msgf("GOMAXPROCS: %d", runtime.GOMAXPROCS(0))
+			log.Info().Msgf("starting Centrifugo %s", VERSION)
+			log.Info().Msgf("config path: %s", absConfPath)
+			log.Info().Msgf("pid: %d", os.Getpid())
+			log.Info().Msgf("engine: %s", strings.ToTitle(engineName))
+			log.Info().Msgf("gomaxprocs: %d", runtime.GOMAXPROCS(0))
 			if viper.GetBool("client_insecure") {
 				log.Warn().Msg("INSECURE client mode enabled")
 			}
@@ -177,12 +177,12 @@ func main() {
 				grpcAPIAddr = fmt.Sprintf(":%d", viper.GetInt("grpc_api_port"))
 				grpcAPIConn, err := net.Listen("tcp", grpcAPIAddr)
 				if err != nil {
-					log.Fatal().Msgf("Cannot listen to address %s", grpcAPIAddr)
+					log.Fatal().Msgf("cannot listen to address %s", grpcAPIAddr)
 				}
 				grpcOpts := []grpc.ServerOption{}
 				tlsConfig, err := getTLSConfig()
 				if err != nil {
-					log.Fatal().Msgf("Error getting TLS config: %v", err)
+					log.Fatal().Msgf("error getting TLS config: %v", err)
 				}
 				if tlsConfig != nil {
 					grpcOpts = append(grpcOpts, grpc.Creds(credentials.NewTLS(tlsConfig)))
@@ -191,18 +191,18 @@ func main() {
 				api.RegisterGRPCServerAPI(node, grpcAPIServer, api.GRPCAPIServiceConfig{})
 				go func() {
 					if err := grpcAPIServer.Serve(grpcAPIConn); err != nil {
-						log.Fatal().Msgf("Serve GRPC: %v", err)
+						log.Fatal().Msgf("serve GRPC: %v", err)
 					}
 				}()
 			}
 
 			if grpcAPIServer != nil {
-				log.Info().Msgf("Serving GRPC API service on %s", grpcAPIAddr)
+				log.Info().Msgf("serving GRPC API service on %s", grpcAPIAddr)
 			}
 
 			servers, err := runHTTPServers(node)
 			if err != nil {
-				log.Fatal().Msgf("Error running HTTP server: %v", err)
+				log.Fatal().Msgf("error running HTTP server: %v", err)
 			}
 
 			if viper.GetBool("graphite") {
@@ -215,11 +215,11 @@ func main() {
 						CountersAsDelta: true,
 					})
 					if err != nil {
-						log.Fatal().Msgf("Error building Graphite bridge: %v", err)
+						log.Fatal().Msgf("error building Graphite bridge: %v", err)
 					}
 					err = bridge.Push()
 					if err != nil {
-						log.Fatal().Msgf("Error pushing initial metrics to Graphite: %v", err)
+						log.Fatal().Msgf("error pushing initial metrics to Graphite: %v", err)
 					}
 					bridge.Run(context.Background())
 				}()
@@ -257,7 +257,7 @@ func main() {
 	rootCmd.Flags().StringP("redis_host", "", "127.0.0.1", "Redis host (Redis engine)")
 	rootCmd.Flags().StringP("redis_port", "", "6379", "Redis port (Redis engine)")
 	rootCmd.Flags().StringP("redis_password", "", "", "Redis auth password (Redis engine)")
-	rootCmd.Flags().StringP("redis_db", "", "0", "Redis database (Redis engine)")
+	rootCmd.Flags().IntP("redis_db", "", 0, "Redis database (Redis engine)")
 	rootCmd.Flags().StringP("redis_url", "", "", "Redis connection URL in format redis://:password@hostname:port/db (Redis engine)")
 	rootCmd.Flags().StringP("redis_master_name", "", "", "name of Redis master Sentinel monitors (Redis engine)")
 	rootCmd.Flags().StringP("redis_sentinels", "", "", "comma-separated list of Sentinel addresses (Redis engine)")
@@ -426,30 +426,30 @@ func handleSignals(n *centrifuge.Node, httpServers []*http.Server, grpcAPIServer
 	signal.Notify(sigc, syscall.SIGHUP, syscall.SIGINT, os.Interrupt, syscall.SIGTERM)
 	for {
 		sig := <-sigc
-		log.Info().Msgf("Signal received: %v", sig)
+		log.Info().Msgf("signal received: %v", sig)
 		switch sig {
 		case syscall.SIGHUP:
 			// reload application configuration on SIGHUP.
-			log.Info().Msg("Reloading configuration")
+			log.Info().Msg("reloading configuration")
 			err := viper.ReadInConfig()
 			if err != nil {
 				switch err.(type) {
 				case viper.ConfigParseError:
-					log.Error().Msgf("Error parsing configuration: %s", err)
+					log.Error().Msgf("error parsing configuration: %s", err)
 					continue
 				default:
-					log.Error().Msg("No config file found")
+					log.Error().Msg("no config file found")
 					continue
 				}
 			}
 			cfg := nodeConfig()
 			if err := n.Reload(*cfg); err != nil {
-				log.Error().Msgf("Error reloading: %v", err)
+				log.Error().Msgf("error reloading: %v", err)
 				continue
 			}
-			log.Info().Msg("Configuration successfully reloaded")
+			log.Info().Msg("configuration successfully reloaded")
 		case syscall.SIGINT, os.Interrupt, syscall.SIGTERM:
-			log.Info().Msg("Shutting down, wait...")
+			log.Info().Msg("shutting down, wait...")
 			pidFile := viper.GetString("pid_file")
 			shutdownTimeout := time.Duration(viper.GetInt("shutdown_timeout")) * time.Second
 			go time.AfterFunc(shutdownTimeout, func() {
@@ -531,9 +531,9 @@ func getTLSConfig() (*tls.Config, error) {
 				Addr:    tlsAutocertHTTPAddr,
 			}
 			go func() {
-				log.Info().Msgf("Serving ACME http_01 challenge on %s", tlsAutocertHTTPAddr)
+				log.Info().Msgf("serving ACME http_01 challenge on %s", tlsAutocertHTTPAddr)
 				if err := acmeHTTPserver.ListenAndServe(); err != nil {
-					log.Fatal().Msgf("Can't create server on %s to serve acme http challenge: %v", tlsAutocertHTTPAddr, err)
+					log.Fatal().Msgf("can't create server on %s to serve acme http challenge: %v", tlsAutocertHTTPAddr, err)
 				}
 			}()
 		}
@@ -614,11 +614,11 @@ func runHTTPServers(n *centrifuge.Node) ([]*http.Server, error) {
 
 		addr := net.JoinHostPort(httpAddress, handlerPort)
 
-		log.Info().Msgf("Serving %s endpoints on %s", handlerFlags, addr)
+		log.Info().Msgf("serving %s endpoints on %s", handlerFlags, addr)
 
 		tlsConfig, err := getTLSConfig()
 		if err != nil {
-			log.Fatal().Msgf("Can not get TLS config: %v", err)
+			log.Fatal().Msgf("can not get TLS config: %v", err)
 		}
 		server := &http.Server{
 			Addr:      addr,
@@ -747,7 +747,7 @@ func validateConfig(f string) error {
 		case viper.ConfigParseError:
 			return err
 		default:
-			return errors.New("Unable to locate config file, use \"centrifugo genconfig -c " + f + "\" command to generate one")
+			return errors.New("unable to locate config file, use \"centrifugo genconfig -c " + f + "\" command to generate one")
 		}
 	}
 	c := nodeConfig()
@@ -897,7 +897,7 @@ func redisEngineConfig() (*centrifuge.RedisEngineConfig, error) {
 	sentinelsConf := v.GetString("redis_sentinels")
 
 	password := v.GetString("redis_password")
-	db := v.GetString("redis_db")
+	db := v.GetInt("redis_db")
 
 	hosts := []string{}
 	if hostsConf != "" {
@@ -932,7 +932,7 @@ func redisEngineConfig() (*centrifuge.RedisEngineConfig, error) {
 	}
 
 	if masterNamesConf != "" && sentinelsConf == "" {
-		return nil, fmt.Errorf("Provide at least one Sentinel address")
+		return nil, fmt.Errorf("provide at least one Sentinel address")
 	}
 
 	if masterNamesConf != "" && len(masterNames) < numShards {
@@ -947,7 +947,7 @@ func redisEngineConfig() (*centrifuge.RedisEngineConfig, error) {
 				continue
 			}
 			if _, _, err := net.SplitHostPort(addr); err != nil {
-				return nil, fmt.Errorf("Malformed Sentinel address: %s", addr)
+				return nil, fmt.Errorf("malformed Sentinel address: %s", addr)
 			}
 			sentinelAddrs = append(sentinelAddrs, addr)
 		}
@@ -964,7 +964,7 @@ func redisEngineConfig() (*centrifuge.RedisEngineConfig, error) {
 		}
 		hosts = newHosts
 	} else if len(hosts) != numShards {
-		return nil, fmt.Errorf("Malformed sharding configuration: wrong number of redis hosts")
+		return nil, fmt.Errorf("malformed sharding configuration: wrong number of redis hosts")
 	}
 
 	if len(ports) <= 1 {
@@ -978,11 +978,11 @@ func redisEngineConfig() (*centrifuge.RedisEngineConfig, error) {
 		}
 		ports = newPorts
 	} else if len(ports) != numShards {
-		return nil, fmt.Errorf("Malformed sharding configuration: wrong number of redis ports")
+		return nil, fmt.Errorf("malformed sharding configuration: wrong number of redis ports")
 	}
 
 	if len(urls) > 0 && len(urls) != numShards {
-		return nil, fmt.Errorf("Malformed sharding configuration: wrong number of redis urls")
+		return nil, fmt.Errorf("malformed sharding configuration: wrong number of redis urls")
 	}
 
 	if len(masterNames) == 0 {
@@ -1000,11 +1000,7 @@ func redisEngineConfig() (*centrifuge.RedisEngineConfig, error) {
 
 	dbs := make([]int, numShards)
 	for i := 0; i < numShards; i++ {
-		dbNum, err := strconv.Atoi(db)
-		if err != nil {
-			return nil, fmt.Errorf("malformed Redis db number: %s", db)
-		}
-		dbs[i] = dbNum
+		dbs[i] = db
 	}
 
 	for i, confURL := range urls {
