@@ -168,7 +168,7 @@ Let's look how to set some of these options in config:
     "presence": true,
     "join_leave": true,
     "history_size": 10,
-    "history_lifetime": 30,
+    "history_lifetime": 300,
     "history_recover": true
 }
 ```
@@ -205,7 +205,7 @@ All things together here is an example of `config.json` which includes registere
           "publish": true,
           "anonymous": true,
           "history_size": 10,
-          "history_lifetime": 30,
+          "history_lifetime": 300,
           "history_recover": true
         },
         {

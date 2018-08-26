@@ -153,10 +153,14 @@ func main() {
 				log.Fatal().Msgf("Error running node: %v", err)
 			}
 
-			log.Info().Msgf("starting Centrifugo %s", VERSION)
+			version := VERSION
+			if version == "" {
+				version = "dev"
+			}
+			log.Info().Msgf("starting Centrifugo %s (%s)", version, runtime.Version())
 			log.Info().Msgf("config path: %s", absConfPath)
 			log.Info().Msgf("pid: %d", os.Getpid())
-			log.Info().Msgf("engine: %s", strings.ToTitle(engineName))
+			log.Info().Msgf("engine: %s", strings.Title(engineName))
 			log.Info().Msgf("gomaxprocs: %d", runtime.GOMAXPROCS(0))
 			if viper.GetBool("client_insecure") {
 				log.Warn().Msg("INSECURE client mode enabled")

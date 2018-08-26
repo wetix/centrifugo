@@ -4,26 +4,35 @@ This chapter describes internal client-server protocol in details to help develo
 
 Note that you can always look at existing client implementations in case of any questions, for example [centrifuge-js](https://github.com/centrifugal/centrifuge-js/blob/master/src/centrifuge.js).
 
-### What client should do
+### Client implementation checklist
 
-Here we will look at list of features client library should support. Depending on client implementation some features can be not implemented. If you an author of such library you can use this list as checklist:
+First we will look at list of features client library should support. Depending on client implementation some features can be not implemented. If you an author of client library you can use this list as checklist.
 
-* connect to server using JSON protocol format
-* connect to server using Protobuf protocol format
-* support automatic reconnect in case of errors, network problems etc
-* subscribe on channel and handle asynchronous Publications
-* handle Join and Leave messages
-* handle unsubscribe notifications
-* send asynchronous messages to server
-* handle asynchronous messages from server
-* send RPC commands
-* connect with JWT
-* subscribe to private channels with JWT
-* call `publish`, `presence`, `presence_stats`, `history` methods.
-* support connection JWT refresh
-* support private channel subscription JWT refresh
-* ping/pong to find broken connection
-* support message recovery mechanism
+!!! note
+    Field and method names presented in this checklist can have different names depending on programmer's taste and language style guide
+
+So, client:
+
+* Should work both with Centrifugo and Centrifuge library based server. To work with Centrifugo client must have a method to set connection token. To work with Centrifuge lib client must provide a method to set custom headers (the only exception is browser clients where browser automatically sets headers with respect to domain rules)
+* Should allow to use JSON payload
+* Should allow to use binary payload (actually you can only implement Protobuf protocol as you can pass JSON over it)
+* Must handle cases when many different Replies received in one websocket frame. In case of JSON protocol newline-delimited JSON-streaming format is used to combine several Replies into one websocket frame. In case of Protobuf protocol varint length-prefixed format is used
+* Must survive server reload/restart and internet connection lost. In this case client must try to reconnect with exponentioal backoff strategy
+* Must have several callback methods: `onConnect`, `onDisconnect`. Depending on implementation you can also use `onError` callback for critical errors that could not be gracefully handled. 
+* Should also have `onMessage` callback to handle async messages from server.
+* Must have method to subscribe on channel and set several event handlers: `onPublish`, `onJoin`, `onLeave`, `onSubscribeSuccess`, `onSubscribeError`, `onUnsubscribe`. After subscribe method called it should return `Subscription` object to caller. This subscription object in turn should have some methods: `publish`, `unsubscribe`, `subscribe`, `history`, `presence`, `presence_stats`.
+* Should have `publish` method to publish into channel without subscribing to it.
+* Should have `rpc` method to send RPC request to server.
+* Should have `send` method to send asynchronous message to server (without waiting response).
+* Should handle disconnect reason. In case of Websocket it is sent by server in CLOSE Websocket frame. This is a string containing JSON object with fields: `reason` (string) and `reconnect` (bool). Client should give users access to these fields in disconnect event and automatically follow `reconnect` advice
+* Must send periodic `ping` commands to server and thus detect broken connection. If no ping reply received from server in configured window reconnect workflow must be initiated
+* Should fully reconnect if subscription request timed out. Timeout can be configured by client library users.
+* Should send commands to server with timeout and handle timeout error - depending on method called timeout error handling can differ a bit. For example as said above timeout on subscription request results in full client reconnect workflow.
+* Should support connection token refresh mechanism
+* Should support private channel subscriptions and private subscription token refresh mechanism
+* Should automatically recover messages after reconnect and set appropriate fields in subscribe event context. Two important fields in `onSubscribeSuccess` event context are `recovered` and `isResubscribe`. First field let user know what server thinks about subscription state - were all messages recovered or not. The second field must only be true if resubscribe was caused by temporary network connection lost. If user initiated resubscribe himself (calling `unsubscribe` method and then `subscribe` method) then recover workflow should not be used and `isResubscribe` must be `false`.
+
+Below in this document we will describe protocol concepts in detail.
 
 This document describes protocol specifics for Websocket transport which supports binary and text formats to transfer data. As Centrifuge has various types of messages it serializes protocol messages using JSON or Protobuf (in case of binary websockets).
 
@@ -423,31 +432,3 @@ Every time client disconnects from server it must call unsubscribe handlers for 
 Client must periodically (once in 25 secs, configurable) send ping messages to server. If pong has not beed received in 5 secs (configurable) then client must disconnect from server and try to reconnect with backoff strategy.
 
 Client can automatically batch several requests into one frame to server and also must be able to handle several replies received from server in one frame.
-
-### Client implementation checklist
-
-This is a list of things that should be done by full-featured client.
-
-!!! note
-    Field and method names presented in this checklist can have different names depending on programmer's taste and language style guide
-
-So, client:
-
-* Should work both with Centrifugo and Centrifuge library based server. To work with Centrifugo client must have a method to set connection token. To work with Centrifuge lib client must provide a method to set custom headers (the only exception is browser clients where browser automatically sets headers with respect to domain rules).
-* Should allow to use JSON payload
-* Should allow to use binary payload (actually you can only implement Protobuf protocol as you can pass JSON over it)
-* Must handle cases when many different Replies received in one websocket frame. In case of JSON protocol newline-delimited JSON-streaming format is used to combine several Replies into one websocket frame. In case of Protobuf protocol varint length-prefixed format is used
-* Must survive server reload/restart and internet connection lost. In this case client must try to reconnect with exponentioal backoff strategy
-* Must have several callback methods: `onConnect`, `onDisconnect`. Depending on implementation you can also use `onError` callback for critical errors that could not be gracefully handled. 
-* Should also have `onMessage` callback to handle async messages from server.
-* Must have method to subscribe on channel and set several event handlers: `onPublish`, `onJoin`, `onLeave`, `onSubscribeSuccess`, `onSubscribeError`, `onUnsubscribe`. After subscribe method called it should return `Subscription` object to caller. This subscription object in turn should have some methods: `publish`, `unsubscribe`, `subscribe`, `history`, `presence`, `presence_stats`.
-* Should have `publish` method to publish into channel without subscribing to it.
-* Should have `rpc` method to send RPC request to server.
-* Should have `send` method to send asynchronous message to server (without waiting response).
-* Should handle disconnect reason. In case of Websocket it is sent by server in CLOSE Websocket frame. This is a string containing JSON object with fields: `reason` (string) and `reconnect` (bool). Client should give users access to these fields in disconnect event and automatically follow `reconnect` advice
-* Must send periodic `ping` commands to server and thus detect broken connection. If no ping reply received from server in configured window reconnect workflow must be initiated
-* Should fully reconnect if subscription request timed out. Timeout can be configured by client library users.
-* Should send commands to server with timeout and handle timeout error - depending on method called timeout error handling can differ a bit. For example as said above timeout on subscription request results in full client reconnect workflow.
-* Should support connection token refresh mechanism
-* Should support private channel subscriptions and private subscription token refresh mechanism
-* Should automatically recover messages after reconnect and set appropriate fields in subscribe event context. Two important fields in `onSubscribeSuccess` event context are `recovered` and `isResubscribe`. First field let user know what server thinks about subscription state - were all messages recovered or not. The second field must only be true if resubscribe was caused by temporary network connection lost. If user initiated resubscribe himself (calling `unsubscribe` method and then `subscribe` method) then recover workflow should not be used and `isResubscribe` must be `false`.
