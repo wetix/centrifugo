@@ -43,7 +43,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:e5c989c065a99e3f6204d524d9844eebba3009fcbed61d8db434f31c3d83a2f8"
+  digest = "1:673095bdb12613def48b17e6a85568ab223bef93063c32ee8a69a9f06e360cf7"
   name = "github.com/centrifugal/centrifuge"
   packages = [
     ".",
@@ -54,7 +54,7 @@
     "internal/uuid",
   ]
   pruneopts = "UT"
-  revision = "5b332b14f67ceda62470d04bb1e78c5744fbe2f0"
+  revision = "34db86f42624f776ee52293a8a3ce73364fdde4b"
 
 [[projects]]
   digest = "1:a2c1d0e43bd3baaa071d1b9ed72c27d78169b2b269f71c105ac4ba34b1be4a39"
@@ -167,14 +167,6 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "bb74f1db0675b241733089d5a1faa5dd8b0ef57b"
-
-[[projects]]
-  digest = "1:c3cd663f2f30b92536b9f290ac85c6310dae36a14cb8961553ae9ccf0d85ae41"
-  name = "github.com/nats-io/nuid"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "289cccf02c178dc782430d534e3c1f5b72af807f"
-  version = "v1.0.0"
 
 [[projects]]
   digest = "1:7231124c9669dfb54b82ef8b89f2735cf5d5d2529a23c6ac93a8c4b8bbb28b28"
