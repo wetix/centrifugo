@@ -65,6 +65,6 @@ Here some links for those who still use Centrifugo v1
 * [Centrifugo v1 source code](https://github.com/centrifugal/centrifugo/tree/v1)
 * [Centrifugo v1 documentation](https://fzambia.gitbooks.io/centrifugal/content/)
 * [centrifuge-js v1](https://github.com/centrifugal/centrifuge-js/tree/v1)
-* [centrifuge-go](https://github.com/centrifugal/centrifuge-go/blob/a3a37bb7c2ec521c931dff806ec3821de5e01f98/examples/example.go)
-* [centrifuge-mobile](https://github.com/centrifugal/centrifuge-mobile/tree/d43017261807c3e8c1b40bd288484de6a5bf6c9f)
+* [centrifuge-go](https://github.com/centrifugal/centrifuge-go/tree/v0.0.1)
+* [centrifuge-mobile](https://github.com/centrifugal/centrifuge-mobile/tree/v0.0.1)
 * [examples](https://github.com/centrifugal/examples/tree/ac45e31c7d94ce1d32b59f6e262ce1ec3f3f42f0)
