@@ -43,7 +43,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:673095bdb12613def48b17e6a85568ab223bef93063c32ee8a69a9f06e360cf7"
+  digest = "1:0ae6642ff2b2da8140099df04741f127183adc273edac2cffc310273b9ae57ee"
   name = "github.com/centrifugal/centrifuge"
   packages = [
     ".",
@@ -54,7 +54,7 @@
     "internal/uuid",
   ]
   pruneopts = "UT"
-  revision = "34db86f42624f776ee52293a8a3ce73364fdde4b"
+  revision = "b2cfc081a959a34b56ea6e8f1a107d6a53f96841"
 
 [[projects]]
   digest = "1:a2c1d0e43bd3baaa071d1b9ed72c27d78169b2b269f71c105ac4ba34b1be4a39"
