@@ -374,8 +374,6 @@ var configDefaults = map[string]interface{}{
 	"redis_pubsub_num_workers":        0,
 	"grpc_api":                        false,
 	"grpc_api_port":                   10000,
-	"grpc_api_key":                    "",
-	"grpc_api_insecure":               false,
 	"shutdown_timeout":                30,
 	"shutdown_termination_delay":      1,
 	"graphite":                        false,
