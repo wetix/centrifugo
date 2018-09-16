@@ -31,8 +31,8 @@ deploy:
     on:
       tags: true
       go: '1.11'
-  # - provider: script
-  #   script: misc/scripts/travis_packagecloud.sh
-  #   on:
-  #     tags: true 
-  #     go: '1.11'
+  - provider: script
+    script: misc/scripts/travis_packagecloud.sh
+    on:
+      tags: true 
+      go: '1.11'

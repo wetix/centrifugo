@@ -3,17 +3,17 @@
   "description": "Centrifugo – real-time messaging server",
   "repository": "https://github.com/centrifugal/centrifugo",
   "logo": "https://avatars1.githubusercontent.com/u/6236442?v=3&s=200",
-  "keywords": ["go", "pubsub", "websocket", "real-time", "sockjs", "redis"],
+  "keywords": ["go", "pubsub", "websocket", "real-time", "sockjs", "redis", "json", "protobuf"],
   "env": {
     "GO_LINKER_SYMBOL": "main.VERSION",
     "GO_LINKER_VALUE": "dev",
     "CENTRIFUGO_ADMIN_PASSWORD": "password",
     "CENTRIFUGO_ADMIN_SECRET": {
-      "description": "Web Secret",
+      "description": "Admin secret used to generate admin access token",
       "generator": "secret"
     },
     "CENTRIFUGO_SECRET": {
-      "description": "Centrifugo secret to generate signs",
+      "description": "Centrifugo secret to generate token signatures",
       "generator": "secret"
     },
     "CENTRIFUGO_PUBLISH": "0",

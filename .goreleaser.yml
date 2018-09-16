@@ -4,7 +4,7 @@ release:
     owner: centrifugal
     name: centrifugo
   name_template: '{{.Tag}}'
-  prerelease: true
+  prerelease: false
 brew:
   github:
     owner: centrifugal
