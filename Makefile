@@ -68,7 +68,7 @@ build:
 generate-protobuf :
 	@rm -rf ./protobuf/* && \
 	protoc --proto_path=./misc/proto \
-	--go_out=./protobuf --go_opt=paths=source_relative \
-	--go-grpc_out=./protobuf --go-grpc_opt=paths=source_relative \
+	--go_out=./protobuf/api --go_opt=paths=source_relative \
+	--go-grpc_out=./protobuf/api --go-grpc_opt=paths=source_relative \
 	./misc/proto/*.proto && \
 	echo "proto code generation successful"
