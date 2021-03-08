@@ -16,7 +16,7 @@ brews:
       name: Alexander Emelin
       email: frvzmb@gmail.com
     install: bin.install "centrifugo"
-    homepage: "https://github.com/centrifugal/centrifugo"
+    homepage: "https://github.com/wetix/centrifugo"
 builds:
 - goos:
   - linux

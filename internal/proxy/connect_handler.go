@@ -6,7 +6,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/centrifugal/centrifugo/internal/rule"
+	"github.com/wetix/centrifugo/internal/rule"
 
 	"github.com/centrifugal/centrifuge"
 	"github.com/prometheus/client_golang/prometheus"

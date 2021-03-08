@@ -232,4 +232,4 @@ So as soon as client reconnects it can restore its state from fast in-memory eve
 
 Hope advices given here will be useful for a reader and will help writing a more robust and more scalable real-time application backends.
 
-[Centrifugo server](https://github.com/centrifugal/centrifugo/) and [Centrifuge library for Go language](https://github.com/centrifugal/centrifuge) have most of the mechanics described here including the last one – message stream for topics limited by size and retention period. Both also have techniques to prevent message loss due to at most once nature of Redis PUB/SUB giving at least once delivery guarantee inside message history window size and retention period.
+[Centrifugo server](https://github.com/wetix/centrifugo/) and [Centrifuge library for Go language](https://github.com/centrifugal/centrifuge) have most of the mechanics described here including the last one – message stream for topics limited by size and retention period. Both also have techniques to prevent message loss due to at most once nature of Redis PUB/SUB giving at least once delivery guarantee inside message history window size and retention period.

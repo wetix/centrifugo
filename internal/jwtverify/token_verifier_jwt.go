@@ -11,8 +11,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/centrifugal/centrifugo/internal/jwks"
 	"github.com/cristalhq/jwt/v3"
+	"github.com/wetix/centrifugo/internal/jwks"
 )
 
 type VerifierConfig struct {

@@ -1,7 +1,6 @@
-
 syntax = "proto3";
 
-package api;
+package protobuf;
 
 message ClientInfo {
     string user = 1;

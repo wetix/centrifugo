@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/centrifugal/centrifugo/internal/middleware"
+	"github.com/wetix/centrifugo/internal/middleware"
 )
 
 // SubscribeRequestHTTP ...

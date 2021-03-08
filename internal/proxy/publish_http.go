@@ -8,7 +8,7 @@ import (
 
 	"github.com/centrifugal/centrifuge"
 
-	"github.com/centrifugal/centrifugo/internal/middleware"
+	"github.com/wetix/centrifugo/internal/middleware"
 )
 
 // PublishRequestHTTP ...

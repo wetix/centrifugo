@@ -22,20 +22,20 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/centrifugal/centrifugo/internal/admin"
-	"github.com/centrifugal/centrifugo/internal/api"
-	"github.com/centrifugal/centrifugo/internal/client"
-	"github.com/centrifugal/centrifugo/internal/health"
-	"github.com/centrifugal/centrifugo/internal/jwtutils"
-	"github.com/centrifugal/centrifugo/internal/jwtverify"
-	"github.com/centrifugal/centrifugo/internal/logutils"
-	"github.com/centrifugal/centrifugo/internal/metrics/graphite"
-	"github.com/centrifugal/centrifugo/internal/middleware"
-	"github.com/centrifugal/centrifugo/internal/natsbroker"
-	"github.com/centrifugal/centrifugo/internal/proxy"
-	"github.com/centrifugal/centrifugo/internal/rule"
-	"github.com/centrifugal/centrifugo/internal/tools"
-	"github.com/centrifugal/centrifugo/internal/webui"
+	"github.com/wetix/centrifugo/internal/admin"
+	"github.com/wetix/centrifugo/internal/api"
+	"github.com/wetix/centrifugo/internal/client"
+	"github.com/wetix/centrifugo/internal/health"
+	"github.com/wetix/centrifugo/internal/jwtutils"
+	"github.com/wetix/centrifugo/internal/jwtverify"
+	"github.com/wetix/centrifugo/internal/logutils"
+	"github.com/wetix/centrifugo/internal/metrics/graphite"
+	"github.com/wetix/centrifugo/internal/middleware"
+	"github.com/wetix/centrifugo/internal/natsbroker"
+	"github.com/wetix/centrifugo/internal/proxy"
+	"github.com/wetix/centrifugo/internal/rule"
+	"github.com/wetix/centrifugo/internal/tools"
+	"github.com/wetix/centrifugo/internal/webui"
 
 	"github.com/FZambia/viper-lite"
 	"github.com/centrifugal/centrifuge"
@@ -311,7 +311,7 @@ func main() {
 			nodeConfig := nodeConfig(VERSION)
 
 			if !viper.GetBool("v3_use_offset") {
-				log.Warn().Msgf("consider migrating to offset protocol field, details: https://github.com/centrifugal/centrifugo/releases/tag/v2.5.0")
+				log.Warn().Msgf("consider migrating to offset protocol field, details: https://github.com/wetix/centrifugo/releases/tag/v2.5.0")
 				// TODO v3: remove compatibility flags.
 				centrifuge.CompatibilityFlags |= centrifuge.UseSeqGen
 			}
@@ -815,7 +815,7 @@ func getTLSConfig() (*tls.Config, error) {
 
 		return &tls.Config{
 			GetCertificate: func(hello *tls.ClientHelloInfo) (*tls.Certificate, error) {
-				// See https://github.com/centrifugal/centrifugo/issues/144#issuecomment-279393819
+				// See https://github.com/wetix/centrifugo/issues/144#issuecomment-279393819
 				if tlsAutocertServerName != "" && hello.ServerName == "" {
 					hello.ServerName = tlsAutocertServerName
 				}

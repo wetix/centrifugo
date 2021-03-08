@@ -20,7 +20,7 @@ This post is going to be pretty long (looks like I am a huge fan of long reads) 
 
 ## How it's all started
 
-I wrote several blog posts before ([for example this one](https://medium.com/@fzambia/four-years-in-centrifuge-ce7a94e8b1a8) – yep, it's on Medium...) about an original motivation of [Centrifugo](https://github.com/centrifugal/centrifugo) server.
+I wrote several blog posts before ([for example this one](https://medium.com/@fzambia/four-years-in-centrifuge-ce7a94e8b1a8) – yep, it's on Medium...) about an original motivation of [Centrifugo](https://github.com/wetix/centrifugo) server.
 
 !!!danger
     Centrifugo server is not the same as Centrifuge library for Go. It's a full-featured project built on top of Centrifuge library. Naming can be confusing, but it's not too hard once you spend some time with ecosystem.

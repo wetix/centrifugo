@@ -18,7 +18,7 @@ See [installation instructions](https://centrifugal.github.io/centrifugo/server/
 
 Try our [demo instance](https://centrifugo2.herokuapp.com/) on Heroku (admin password is `password`, token_hmac_secret_key is `secret`, API key is `api_key`). Or deploy your own Centrifugo instance in one click:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/centrifugal/centrifugo)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wetix/centrifugo)
 
 ### Highlights
 

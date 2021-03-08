@@ -62,7 +62,7 @@ Symbols `*` and `/` in channel name are now reserved for Centrifugo future needs
 
 Here some links for those who still use Centrifugo v1
 
-* [Centrifugo v1 source code](https://github.com/centrifugal/centrifugo/tree/v1)
+* [Centrifugo v1 source code](https://github.com/wetix/centrifugo/tree/v1)
 * [Centrifugo v1 documentation](https://fzambia.gitbooks.io/centrifugal/content/)
 * [centrifuge-js v1](https://github.com/centrifugal/centrifuge-js/tree/v1)
 * [centrifuge-go](https://github.com/centrifugal/centrifuge-go/tree/v0.0.1)

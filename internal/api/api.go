@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/centrifugal/centrifugo/internal/rule"
+	"github.com/wetix/centrifugo/internal/rule"
 
 	"github.com/centrifugal/centrifuge"
 )

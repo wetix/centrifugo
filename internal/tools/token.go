@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/centrifugal/centrifugo/internal/jwtverify"
+	"github.com/wetix/centrifugo/internal/jwtverify"
 
 	"github.com/cristalhq/jwt/v3"
 )

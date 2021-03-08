@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/centrifugal/centrifugo/internal/jwtverify"
-	"github.com/centrifugal/centrifugo/internal/proxy"
-	"github.com/centrifugal/centrifugo/internal/rule"
+	"github.com/wetix/centrifugo/internal/jwtverify"
+	"github.com/wetix/centrifugo/internal/proxy"
+	"github.com/wetix/centrifugo/internal/rule"
 
 	"github.com/centrifugal/centrifuge"
 	"github.com/centrifugal/protocol"

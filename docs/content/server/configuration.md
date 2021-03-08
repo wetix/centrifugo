@@ -227,7 +227,7 @@ And endpoint:
 http://localhost:8000/debug/pprof/
 ```
 
-– will show you useful info about internal state of Centrifugo instance. This info is especially helpful when troubleshooting. See [wiki page](https://github.com/centrifugal/centrifugo/wiki/Investigating-performance-issues) for more info.
+– will show you useful info about internal state of Centrifugo instance. This info is especially helpful when troubleshooting. See [wiki page](https://github.com/wetix/centrifugo/wiki/Investigating-performance-issues) for more info.
 
 ### Health check endpoint
 

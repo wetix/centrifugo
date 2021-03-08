@@ -81,7 +81,7 @@ browsers such as Chrome 49 on Windows XP and IE8 on XP:
 * `tls_autocert_force_rsa` - this is a boolean option, by default `false`. When enabled it forces
     autocert manager generate certificates with 2048-bit RSA keys.
 * `tls_autocert_server_name` - string option, allows to set server name for client handshake hello.
-    This can be useful to deal with old browsers without SNI support - see [comment](https://github.com/centrifugal/centrifugo/issues/144#issuecomment-279393819)
+    This can be useful to deal with old browsers without SNI support - see [comment](https://github.com/wetix/centrifugo/issues/144#issuecomment-279393819)
 
 `grpc_api_tls_disable` boolean flag allows to disable TLS for GRPC API server but keep it on for HTTP endpoints.
 

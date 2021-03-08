@@ -64,3 +64,11 @@ local-deps:
 
 build:
 	CGO_ENABLED=0 go build -mod=vendor
+
+generate-protobuf :
+	@rm -rf ./protobuf/* && \
+	protoc --proto_path=./misc/proto \
+	--go_out=./protobuf --go_opt=paths=source_relative \
+	--go-grpc_out=./protobuf --go-grpc_opt=paths=source_relative \
+	./misc/proto/*.proto && \
+	echo "proto code generation successful"

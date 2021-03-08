@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/centrifugal/centrifugo/internal/rule"
+	"github.com/wetix/centrifugo/internal/rule"
 
 	"github.com/stretchr/testify/require"
 )

@@ -1,8 +1,8 @@
 // +heroku goVersion go1.14
 
-module github.com/centrifugal/centrifugo
+module github.com/wetix/centrifugo
 
-go 1.13
+go 1.15
 
 require (
 	github.com/FZambia/eagle v0.0.1
@@ -14,7 +14,7 @@ require (
 	github.com/cristalhq/jwt/v3 v3.0.9
 	github.com/gogo/protobuf v1.3.1
 	github.com/google/go-cmp v0.5.4 // indirect
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.2.0
 	github.com/gorilla/securecookie v1.1.1
 	github.com/mattn/go-isatty v0.0.12
 	github.com/mitchellh/mapstructure v1.2.2 // indirect
@@ -33,7 +33,7 @@ require (
 	golang.org/x/net v0.0.0-20200625001655-4c5254603344
 	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a
 	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
-	google.golang.org/grpc v1.28.0
-	google.golang.org/protobuf v1.25.0 // indirect
+	google.golang.org/grpc v1.36.0
+	google.golang.org/protobuf v1.25.0
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

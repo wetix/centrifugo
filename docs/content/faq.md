@@ -113,7 +113,7 @@ The same relates to other channel options.
 
 ### Does Centrifugo support webhooks?
 
-Centrifugo designed in a way where messages mostly flow one direction: from server to client. In idiomatic case you publish messages to your backend first, then after saving to your main database publish to channel over Centrifugo API to deliver a real-time message to all active channel subscribers. Now if you need any extra callbacks/webhooks you can call your application backend yourself from client side (for example just after connect event fired in client library). There are several reasons why we can't simply add webhooks – some of them described in [this issue](https://github.com/centrifugal/centrifugo/issues/195).
+Centrifugo designed in a way where messages mostly flow one direction: from server to client. In idiomatic case you publish messages to your backend first, then after saving to your main database publish to channel over Centrifugo API to deliver a real-time message to all active channel subscribers. Now if you need any extra callbacks/webhooks you can call your application backend yourself from client side (for example just after connect event fired in client library). There are several reasons why we can't simply add webhooks – some of them described in [this issue](https://github.com/wetix/centrifugo/issues/195).
 
 A bit tricky thing are disconnects. The difficulty is because there is no guarantee that disconnect code will have time to execute on client side (as client can just switch off its device or simply lose internet connection). If you need to know that client disconnected and program your business logic around this fact then the only reasonable approach is periodically call your backend from client side and update user status somewhere on backend (use Redis maybe). This is a pretty robust solution where you can't occasionally miss disconnect event.
 
@@ -127,7 +127,7 @@ The same is true for join/leave messages - as soon as you turn on join/leave eve
 
 ### What is the difference between Centrifugo and Centrifuge
 
-[Centrifugo](https://github.com/centrifugal/centrifugo) is a server built on top of [Centrifuge](https://github.com/centrifugal/centrifuge) library for Go language.
+[Centrifugo](https://github.com/wetix/centrifugo) is a server built on top of [Centrifuge](https://github.com/centrifugal/centrifuge) library for Go language.
 
 This documentation built to describe Centrifugo. Though many things said here can be considered as extra documentation for Centrifuge library.
 

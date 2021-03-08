@@ -5,8 +5,8 @@ No backwards incompatible changes here.
 
 Improvements:
 
-* [JSON Web Key](https://tools.ietf.org/html/rfc7517) support - see [pull request #410](https://github.com/centrifugal/centrifugo/pull/410) and [description in docs](https://centrifugal.github.io/centrifugo/server/authentication/#json-web-key-support)
-* Support ECDSA algorithm for verifying JWT - see [pull request #420](https://github.com/centrifugal/centrifugo/pull/420) and updated [authentication docs chapter](https://centrifugal.github.io/centrifugo/server/authentication/)
+* [JSON Web Key](https://tools.ietf.org/html/rfc7517) support - see [pull request #410](https://github.com/wetix/centrifugo/pull/410) and [description in docs](https://centrifugal.github.io/centrifugo/server/authentication/#json-web-key-support)
+* Support ECDSA algorithm for verifying JWT - see [pull request #420](https://github.com/wetix/centrifugo/pull/420) and updated [authentication docs chapter](https://centrifugal.github.io/centrifugo/server/authentication/)
 * Various documentation clarifications - did you know that you can [use subscribe proxy instead of private channels](https://centrifugal.github.io/centrifugo/server/proxy/#subscribe-proxy) for example?
 
 Fixes:
@@ -16,7 +16,7 @@ Fixes:
 
 Other:
 
-* Centrifugo repo [migrated from Travis CI to GH actions](https://github.com/centrifugal/centrifugo/issues/414), `golangci-lint` now works in CI
+* Centrifugo repo [migrated from Travis CI to GH actions](https://github.com/wetix/centrifugo/issues/414), `golangci-lint` now works in CI
 * Check out [a new community package](https://github.com/denis660/laravel-centrifugo) for Laravel that works with the latest version of framework
 
 v2.8.1
@@ -37,7 +37,7 @@ Centrifugo v2.8.0 has many internal changes that could affect overall performanc
 
 Improvements:
 
-* Centrifugo can now maintain a single connection from a user when personal server-side channel used. See [#396](https://github.com/centrifugal/centrifugo/issues/396) and [docs](https://centrifugal.github.io/centrifugo/server/server_subs/#maintain-single-user-connection)
+* Centrifugo can now maintain a single connection from a user when personal server-side channel used. See [#396](https://github.com/wetix/centrifugo/issues/396) and [docs](https://centrifugal.github.io/centrifugo/server/server_subs/#maintain-single-user-connection)
 * New option `client_concurrency`. This option allows processing client commands concurrently. Depending on your use case this option has potential to radically reduce latency between a client and Centrifugo. See [detailed description in docs](https://centrifugal.github.io/centrifugo/server/configuration/#client_concurrency)
 * When using `client_user_connection_limit` and user reaches max amount of connections Centrifugo will now disconnect client with `connection limit` reason instead of returning `limit exceeded` error. Centrifugo will give a client advice to not reconnect.
 
@@ -80,8 +80,8 @@ Fixes:
 
 **Coming soon 🔥:**
 
-* Official Grafana Dashboard for Prometheus storage is on its way to Centrifugo users. [Track this issue](https://github.com/centrifugal/centrifugo/issues/383) for a status, the work almost finished. 
-* Official Centrifugo Helm Chart for Kubernetes. [Track this issue](https://github.com/centrifugal/centrifugo/issues/385) for a status, the work almost finished.
+* Official Grafana Dashboard for Prometheus storage is on its way to Centrifugo users. [Track this issue](https://github.com/wetix/centrifugo/issues/383) for a status, the work almost finished. 
+* Official Centrifugo Helm Chart for Kubernetes. [Track this issue](https://github.com/wetix/centrifugo/issues/385) for a status, the work almost finished.
 
 v2.6.2
 ======
@@ -98,7 +98,7 @@ Improvements:
 
 Fixes:
 
-* fix panic on connect in 32-bit ARM builds, see [#387](https://github.com/centrifugal/centrifugo/issues/387)
+* fix panic on connect in 32-bit ARM builds, see [#387](https://github.com/wetix/centrifugo/issues/387)
 
 v2.6.1
 ======
@@ -143,7 +143,7 @@ Improvements:
 
 Fixes:
 
-* add `Content-Type: application/json` header to outgoing HTTP proxy requests to app backend for better integration with some frameworks. [#368](https://github.com/centrifugal/centrifugo/issues/368)
+* add `Content-Type: application/json` header to outgoing HTTP proxy requests to app backend for better integration with some frameworks. [#368](https://github.com/wetix/centrifugo/issues/368)
 * fix wrong channel name in Join messages sent to client in case of server-side subscription to many channels
 * fix disconnect code unmarshalling after receiving response from HTTP proxy requests, it was ignored previously
 
@@ -198,7 +198,7 @@ Improvements:
 * New private subscription JWT `eto` claim - see [its description in docs](https://centrifugal.github.io/centrifugo/server/private_channels/#eto)
 * Options to disable WebSocket, SockJS and API handlers – [see docs](https://centrifugal.github.io/centrifugo/server/configuration/#disable-default-endpoints)
 * New option `websocket_use_write_buffer_pool` – [see docs](https://centrifugal.github.io/centrifugo/transports/websocket/)
-* Metrics now include histograms of requests durations - [pull request](https://github.com/centrifugal/centrifugo/pull/337)
+* Metrics now include histograms of requests durations - [pull request](https://github.com/wetix/centrifugo/pull/337)
 * Add Linux ARM binary release
 
 Fixes:
@@ -213,8 +213,8 @@ This release contains several improvements to proxy feature introduced in v2.3.0
 
 Improvements:
 
-* With `proxy_extra_http_headers` configuration option it's now possible to set a list of extra headers that should be copied from original client request to proxied HTTP request - see [#334](https://github.com/centrifugal/centrifugo/issues/334) for motivation and [updated proxy docs](https://centrifugal.github.io/centrifugo/server/proxy/)
-* You can pass custom data in response to connect event and this data will be available in `connect` event callback context on client side. See [#332](https://github.com/centrifugal/centrifugo/issues/332) for more details
+* With `proxy_extra_http_headers` configuration option it's now possible to set a list of extra headers that should be copied from original client request to proxied HTTP request - see [#334](https://github.com/wetix/centrifugo/issues/334) for motivation and [updated proxy docs](https://centrifugal.github.io/centrifugo/server/proxy/)
+* You can pass custom data in response to connect event and this data will be available in `connect` event callback context on client side. See [#332](https://github.com/wetix/centrifugo/issues/332) for more details
 * Starting from this release `Origin` header is proxied to your backend by default - see [full list in docs](https://centrifugal.github.io/centrifugo/server/proxy/#proxy-headers)
 
 v2.3.0
@@ -238,12 +238,12 @@ v2.2.7
 
 Improvements:
 
-* Support passing `api_key` over URL param, see [#317](https://github.com/centrifugal/centrifugo/issues/317) for reasoning behind this feature
+* Support passing `api_key` over URL param, see [#317](https://github.com/wetix/centrifugo/issues/317) for reasoning behind this feature
 
 v2.2.6
 ======
 
-This is a quick fix release. Fixes an error on start when `namespaces` not set in configuration file,the bug was introduced in v2.2.5, see [#319](https://github.com/centrifugal/centrifugo/issues/319) for details.
+This is a quick fix release. Fixes an error on start when `namespaces` not set in configuration file,the bug was introduced in v2.2.5, see [#319](https://github.com/wetix/centrifugo/issues/319) for details.
 
 v2.2.5
 ======
@@ -260,7 +260,7 @@ Improvements:
 Fixes:
 
 * Fix setting `presence_disable_for_client` and `history_disable_for_client` on config top level
-* Fix Let's Encrypt integration by updating to ACMEv2 / RFC 8555 compilant acme library, see [#311](https://github.com/centrifugal/centrifugo/issues/311)
+* Fix Let's Encrypt integration by updating to ACMEv2 / RFC 8555 compilant acme library, see [#311](https://github.com/wetix/centrifugo/issues/311)
 
 
 v2.2.4
@@ -291,7 +291,7 @@ Improvements:
 Fixes:
 
 * Fix crash due to race condition, race reproduced when history recover option was on. See [commit](https://github.com/centrifugal/centrifuge/pull/73/files) with fix details
-* Fix lack of `client_anonymous` option. See [#304](https://github.com/centrifugal/centrifugo/issues/304)
+* Fix lack of `client_anonymous` option. See [#304](https://github.com/wetix/centrifugo/issues/304)
 
 This release based on Go 1.13.x
 
@@ -302,11 +302,11 @@ No backwards incompatible changes here.
 
 Improvements:
 
-* Support for `tls-alpn-01` ACME challenge, see [#283](https://github.com/centrifugal/centrifugo/issues/283)
+* Support for `tls-alpn-01` ACME challenge, see [#283](https://github.com/wetix/centrifugo/issues/283)
 
 Fixes:
 
-* fix running HTTP server several times when http-01 ACME challenge used, see [#288](https://github.com/centrifugal/centrifugo/issues/288)
+* fix running HTTP server several times when http-01 ACME challenge used, see [#288](https://github.com/wetix/centrifugo/issues/288)
 
 
 v2.2.1
@@ -326,12 +326,12 @@ Fixes:
 v2.2.0
 ======
 
-This release based on latest refactoring of Centrifuge library. The refactoring opens a road for possible interesting improvements in Centrifugo – such as possibility to use any PUB/SUB broker instead of Redis (here is an [example of possible integration](https://github.com/centrifugal/centrifugo/pull/273) with Nats server), or even combine another broker with existing Redis engine features to still have recovery and presence features. Though these ideas are not implemented in Centrifugo yet. Performance of broadcast operations can be slightly decreased due to some internal changes in Centrifuge library. Also take a close look at backwards incompatible changes section below for one breaking change.
+This release based on latest refactoring of Centrifuge library. The refactoring opens a road for possible interesting improvements in Centrifugo – such as possibility to use any PUB/SUB broker instead of Redis (here is an [example of possible integration](https://github.com/wetix/centrifugo/pull/273) with Nats server), or even combine another broker with existing Redis engine features to still have recovery and presence features. Though these ideas are not implemented in Centrifugo yet. Performance of broadcast operations can be slightly decreased due to some internal changes in Centrifuge library. Also take a close look at backwards incompatible changes section below for one breaking change.
 
 Improvements:
 
 * Track client position in channels with `history_recover` option enabled and disconnect in case of insufficient state. This resolves an edge case when messages could be lost in channels with `history_recover` option enabled after node reconnect to Redis (imagine situation when Redis was unavailable for some time but before Centrifugo node reconnects publisher was able to successfully send a message to channel on another node which reconnected to Redis faster). With new mechanism client won't miss messages though can receive them with some delay. As such situations should be pretty rare on practice it should be a reasonable compromise for applications. New mechanism adds more load on Redis as Centrifugo node periodically polls channel history state. The load is linearly proportional to amount of active channels with `history_recover` option on. By default Centrifugo will check client position in channel stream not often than once in 40 seconds so an additional load on Redis should not be too high
-* New options for more flexible conrol over exposed endpoint interfaces and ports: `internal_address`, `tls_external`, `admin_external`. See description calling `centrifugo -h`. [#262](https://github.com/centrifugal/centrifugo/pull/262), [#264](https://github.com/centrifugal/centrifugo/pull/264)
+* New options for more flexible conrol over exposed endpoint interfaces and ports: `internal_address`, `tls_external`, `admin_external`. See description calling `centrifugo -h`. [#262](https://github.com/wetix/centrifugo/pull/262), [#264](https://github.com/wetix/centrifugo/pull/264)
 * Small optimizations in Websocket and SockjS transports writes
 * Server initiated disconnect number metrics labeled with disconnect code 
 
@@ -351,15 +351,15 @@ Improvements:
 * Refactored export to Graphite, you can now control aggregation interval using `graphite_interval` option (in seconds), during refactoring some magical path transformation was removed so now we have more predictable path generation. Though Graphite paths changed with this refactoring
 * Web interface rewritten using modern Javascript stack - latest React, Webpack instead of Gulp, ES6 syntax 
 * Aggregated metrics also added to `info` command reply. This makes it possible to look at metrics in admin panel too when calling `info` command
-* More options can be set over environment variables – see [#254](https://github.com/centrifugal/centrifugo/issues/254)
-* Healthcheck endpoint – see [#252](https://github.com/centrifugal/centrifugo/issues/252)
+* More options can be set over environment variables – see [#254](https://github.com/wetix/centrifugo/issues/254)
+* Healthcheck endpoint – see [#252](https://github.com/wetix/centrifugo/issues/252)
 * New important chapter in docs – [integration guide](https://centrifugal.github.io/centrifugo/guide/)
 * Support setting `api_key` when using `Deploy on Heroku` button
 * Better timeout handling in Redis engine – client timeout is now bigger than default `redis_read_timeout` so application can more reliably handle errors
 
 Fixes:
 
-* Dockerfile had no correct `WORKDIR` set so it was only possible to use absolute config file path, now this is fixed in [this commit](https://github.com/centrifugal/centrifugo/commit/08be85223aa849d9996c16971f9d049125ade50c) 
+* Dockerfile had no correct `WORKDIR` set so it was only possible to use absolute config file path, now this is fixed in [this commit](https://github.com/wetix/centrifugo/commit/08be85223aa849d9996c16971f9d049125ade50c) 
 * Show node version in admin web panel
 * Fix possible goroutine leak on client connection close, [commit](https://github.com/centrifugal/centrifuge/commit/a70909c2a2677932fcef0910525ea9497ff9acf2)
 
@@ -371,7 +371,7 @@ v2.0.2
 Improvements:
 
 * Redis TLS connection support - see [issue in Centrifuge lib](https://github.com/centrifugal/centrifuge/issues/23) and [updated docs](https://centrifugal.github.io/centrifugo/server/engines/#redis-engine)
-* Do not send Authorization header in admin web interface when insecure admin mode enabled - helps to protect admin interface with basic authorization (see [#240](https://github.com/centrifugal/centrifugo/issues/240))
+* Do not send Authorization header in admin web interface when insecure admin mode enabled - helps to protect admin interface with basic authorization (see [#240](https://github.com/wetix/centrifugo/issues/240))
 
 Fixes:
 
@@ -395,7 +395,7 @@ Fixes:
 * Fix admin web interface [logout issue](https://github.com/centrifugal/web/issues/14) when session expired
 * Fix io timeout error when using Redis Engine with sharding enabled
 * Fix `checkconfig` command
-* Fix typo in metric name - see [#233](https://github.com/centrifugal/centrifugo/pull/233)
+* Fix typo in metric name - see [#233](https://github.com/wetix/centrifugo/pull/233)
 
 v2.0.0
 ======
@@ -443,10 +443,10 @@ No backwards incompatible changes here.
 ### Features
 
 * package for Ubuntu 18.04
-* add Centrifugo `version` to stats output. Also add rusage stime and utime values to metrics. See [#222](https://github.com/centrifugal/centrifugo/issues/222) for details. Thanks to @Sannis for contributions
-* expose more configuration options to be set over environment variables. See [commit](https://github.com/centrifugal/centrifugo/commit/bf8655914ef94aaa4b2579d943b64fc63e7b9b08) and [related issue](https://github.com/centrifugal/centrifugo/issues/223)
-* more context in debug logs regarding to client connection. See [#201](https://github.com/centrifugal/centrifugo/issues/201)
-* fix deb package upgrade - see [#219](https://github.com/centrifugal/centrifugo/issues/219) for details
+* add Centrifugo `version` to stats output. Also add rusage stime and utime values to metrics. See [#222](https://github.com/wetix/centrifugo/issues/222) for details. Thanks to @Sannis for contributions
+* expose more configuration options to be set over environment variables. See [commit](https://github.com/wetix/centrifugo/commit/bf8655914ef94aaa4b2579d943b64fc63e7b9b08) and [related issue](https://github.com/wetix/centrifugo/issues/223)
+* more context in debug logs regarding to client connection. See [#201](https://github.com/wetix/centrifugo/issues/201)
+* fix deb package upgrade - see [#219](https://github.com/wetix/centrifugo/issues/219) for details
 
 ### Internal
 
@@ -459,11 +459,11 @@ No backwards incompatible changes here.
 
 ### Fixes
 
-* fix malformed JSON when using empty `info` in connection refresh request - see [#214](https://github.com/centrifugal/centrifugo/issues/214).
+* fix malformed JSON when using empty `info` in connection refresh request - see [#214](https://github.com/wetix/centrifugo/issues/214).
 
 ### Features
 
-* support ACME http_01 challenge using new `ssl_autocert_http` boolean option. Centrifugo will serve http_01 ACME challenge on port 80. See [#210](https://github.com/centrifugal/centrifugo/issues/210) for more details. 
+* support ACME http_01 challenge using new `ssl_autocert_http` boolean option. Centrifugo will serve http_01 ACME challenge on port 80. See [#210](https://github.com/wetix/centrifugo/issues/210) for more details. 
 
 ### Internal
 
@@ -476,7 +476,7 @@ No backwards incompatible changes here.
 
 ### Fixes
 
-* the fix of goroutine leak in 1.7.7 was incomplete - looks like in this release the problem described in [#207](https://github.com/centrifugal/centrifugo/issues/207) gone away.
+* the fix of goroutine leak in 1.7.7 was incomplete - looks like in this release the problem described in [#207](https://github.com/wetix/centrifugo/issues/207) gone away.
 
 v1.7.7
 ======
@@ -485,11 +485,11 @@ No backwards incompatible changes here.
 
 ### Fixes
 
-* fix goroutine leak due to deadlock, see [#207](https://github.com/centrifugal/centrifugo/issues/207)
+* fix goroutine leak due to deadlock, see [#207](https://github.com/wetix/centrifugo/issues/207)
 
 ### Features
 
-* possibility to set message `uid` via API request - see [#205](https://github.com/centrifugal/centrifugo/pull/205)
+* possibility to set message `uid` via API request - see [#205](https://github.com/wetix/centrifugo/pull/205)
 
 ### Internal
 
@@ -510,14 +510,14 @@ v1.7.5
 
 No backwards incompatible changes here.
 
-The only change is using new version of Go for builds (Go 1.9.2). This will allow to analize performance profiles more easily without having to use binaries. See [this new wiki page](https://github.com/centrifugal/centrifugo/wiki/Investigating-performance-issues) about investigating performance issues.
+The only change is using new version of Go for builds (Go 1.9.2). This will allow to analize performance profiles more easily without having to use binaries. See [this new wiki page](https://github.com/wetix/centrifugo/wiki/Investigating-performance-issues) about investigating performance issues.
 
 v1.7.4
 ======
 
 No backwards incompatible changes here.
 
-This release is centered around internal refactoring to detach node from server - see more details in [#186](https://github.com/centrifugal/centrifugo/pull/186).
+This release is centered around internal refactoring to detach node from server - see more details in [#186](https://github.com/wetix/centrifugo/pull/186).
 
 ### Features
 
@@ -551,7 +551,7 @@ No backwards incompatible changes here.
 
 ### Fixes
 
-* fix mass resubscribe after several Redis disconnects in a row - more details in [#163](https://github.com/centrifugal/centrifugo/pull/163)
+* fix mass resubscribe after several Redis disconnects in a row - more details in [#163](https://github.com/wetix/centrifugo/pull/163)
 
 ### Features
 
@@ -566,7 +566,7 @@ This release changes two important aspects of Centrifugo. We expect that it will
 ### What's changed
 
 * integration with Gorilla Websocket [PreparedMessage](https://godoc.org/github.com/gorilla/websocket#PreparedMessage) for raw websocket. We expect it to drastically improve websocket compression case - reducing both memory and CPU in large fan-out scenarios. This change does not affect SockJS in any way.
-* `timestamp` field removed from message. See [#147](https://github.com/centrifugal/centrifugo/issues/147) for motivation.
+* `timestamp` field removed from message. See [#147](https://github.com/wetix/centrifugo/issues/147) for motivation.
 * Several new memory metrics - `node_memory_heap_sys`, `node_memory_heap_alloc`, `node_memory_stack_inuse`
 
 v1.6.5
@@ -576,7 +576,7 @@ No backwards incompatible changes here.
 
 ### Features
 
-* resolve `history_drop_inactive` option edge case (described in [#50](https://github.com/centrifugal/centrifugo/issues/50))
+* resolve `history_drop_inactive` option edge case (described in [#50](https://github.com/wetix/centrifugo/issues/50))
 * two new options for autocert: `ssl_autocert_force_rsa` and `ssl_autocert_server_name`. See [docs](https://fzambia.gitbooks.io/centrifugal/content/deploy/certificates.html#automatic-certificates) for description 
 
 ### Fixes
@@ -589,7 +589,7 @@ v1.6.4
 
 No backwards incompatible changes here.
 
-We **consider removing** `timestamp` field from message as it's seems useless and never used by Centrifugo users. Applications that need timestamp for some reason can include it into message JSON payload. If you have any objections please look at [issue #147](https://github.com/centrifugal/centrifugo/issues/147) and write your thoughts against removing this field.
+We **consider removing** `timestamp` field from message as it's seems useless and never used by Centrifugo users. Applications that need timestamp for some reason can include it into message JSON payload. If you have any objections please look at [issue #147](https://github.com/wetix/centrifugo/issues/147) and write your thoughts against removing this field.
 
 ### Features
 
@@ -598,13 +598,13 @@ We **consider removing** `timestamp` field from message as it's seems useless an
 
 ### Fixes
 
-* fixes crash when using builtin TLS server - see [#145](https://github.com/centrifugal/centrifugo/issues/145)
+* fixes crash when using builtin TLS server - see [#145](https://github.com/wetix/centrifugo/issues/145)
 * redirect Go std lib logging into our INFO logger
 
 ### Internal (for developers/contributors)
 
 * Using Go 1.7.5 for builds
-* As soon as Go 1.8 out we will be able to remove `x/net/http2` dependency as standard lib will contain fix for [#145](https://github.com/centrifugal/centrifugo/issues/145)
+* As soon as Go 1.8 out we will be able to remove `x/net/http2` dependency as standard lib will contain fix for [#145](https://github.com/wetix/centrifugo/issues/145)
 
 
 v1.6.3
@@ -619,7 +619,7 @@ pings](https://fzambia.gitbooks.io/centrifugal/content/mixed/ping.html) a bit.
 ### Fixes
 
 * Random disconnects from Centrifugo when using automatic client to server pings. This is a default 
-behaviour so it affects almost everyone who using Centrifugo 1.6.x, fixes https://github.com/centrifugal/centrifugo/issues/142
+behaviour so it affects almost everyone who using Centrifugo 1.6.x, fixes https://github.com/wetix/centrifugo/issues/142
 * Fix writing headers after headers already written in raw websocket endpoint - this remove annoying log line appearing after client can't upgrade connection to Websocket.
 
 
@@ -648,18 +648,18 @@ This release fixes some configuration problems introduced by v1.6.0 and adds Let
 
 ### Features
 
-* automatic TLS certificates from Let's Encrypt - see [#133](https://github.com/centrifugal/centrifugo/issues/133) and new [dedicated documentation chapter](https://fzambia.gitbooks.io/centrifugal/content/deploy/certificates.html)
+* automatic TLS certificates from Let's Encrypt - see [#133](https://github.com/wetix/centrifugo/issues/133) and new [dedicated documentation chapter](https://fzambia.gitbooks.io/centrifugal/content/deploy/certificates.html)
 * websocket compression performance improvement (due to Gorilla Websocket library update)
 
 ### Fixes
 
-* fix SSL/TLS certificates file option names - see [#132](https://github.com/centrifugal/centrifugo/issues/132)
-* fix `web` option that must enable admin socket automatically - see [#136](https://github.com/centrifugal/centrifugo/issues/136)
+* fix SSL/TLS certificates file option names - see [#132](https://github.com/wetix/centrifugo/issues/132)
+* fix `web` option that must enable admin socket automatically - see [#136](https://github.com/wetix/centrifugo/issues/136)
 
 v1.6.0
 ======
 
-This Centrifugo release is a massive 4-months refactoring of internals with the goal to separate code of different components such as engine, server, metrics, clients to own packages with well-defined API to communicate between them. The code layout changed dramatically. Look at `libcentrifugo` folder [before](https://github.com/centrifugal/centrifugo/tree/v1.5.1/libcentrifugo) and [after](https://github.com/centrifugal/centrifugo/tree/master/libcentrifugo)! Unfortunately there are backwards incompatibilities with previous release - see notes below. The most significant one is changed metrics format in `stats` and `node` API command responses.
+This Centrifugo release is a massive 4-months refactoring of internals with the goal to separate code of different components such as engine, server, metrics, clients to own packages with well-defined API to communicate between them. The code layout changed dramatically. Look at `libcentrifugo` folder [before](https://github.com/wetix/centrifugo/tree/v1.5.1/libcentrifugo) and [after](https://github.com/wetix/centrifugo/tree/master/libcentrifugo)! Unfortunately there are backwards incompatibilities with previous release - see notes below. The most significant one is changed metrics format in `stats` and `node` API command responses.
 
 With new code layout it's much more simple to create custom engines or servers – each with own metrics and configuration options. **We can not guarantee** though that we will keep `libcentrifugo` packages API stable – **our primary goal is still building Centrifugo standalone server**. So if we find something that must be fixed or improved internally - we will fix/improve it even if this could result in packages API changes.
 
@@ -669,7 +669,7 @@ As Centrifugo written in Go the only performant way to write plugins is to impor
 
 * New metrics. Several useful new metrics have been added. For example HTTP API and client request HDR histograms. See updated documentation for complete list. Refactoring resulted in backwards incompatible issue when working with Centrifugo metrics (see below). [Here is a docs chapter](https://fzambia.gitbooks.io/centrifugal/content/server/stats.html) about metrics.
 * Optimizations for client side ping, `centrifuge-js` now automatically sends periodic `ping` commands to server. Centrifugo checks client's last activity time and closes stale connections. Builtin SockJS server won't send heartbeat frames to SockJS clients by default. You can restore the old behaviour though: setting `ping: false` on client side and `sockjs_heartbeat_delay: 25` option in Centrifugo configuration. This all means that you better update `centrifuge-js` client to latest version (`1.4.0`). Read [more about pings in docs](https://fzambia.gitbooks.io/centrifugal/content/mixed/ping.html).
-* Experimental websocket compression support for raw websockets - see [#115](https://github.com/centrifugal/centrifugo/issues/115). Read more details how to enable it [in docs](https://fzambia.gitbooks.io/centrifugal/content/mixed/websocket_compression.html). Keep in mind that enabling websocket compression can result in slower Centrifugo performance - depending on your load this can be noticeable.
+* Experimental websocket compression support for raw websockets - see [#115](https://github.com/wetix/centrifugo/issues/115). Read more details how to enable it [in docs](https://fzambia.gitbooks.io/centrifugal/content/mixed/websocket_compression.html). Keep in mind that enabling websocket compression can result in slower Centrifugo performance - depending on your load this can be noticeable.
 * Serious improvements in Redis API queue consuming. There was a bottleneck as we used BLPOP command to get every message from Redis which resulted in extra RTT. Now it's fixed and we can get several API messages from queue at once and process them. The format of Redis API queue changed - see new format description [in docs](https://fzambia.gitbooks.io/centrifugal/content/server/engines.html). Actually it's now the same as single HTTP API command - so we believe you should be comfortable with it. Old format is still supported but **DEPRECATED** and will be removed in next releases.
 * Redis sharding support. See more details [in docs](https://fzambia.gitbooks.io/centrifugal/content/server/scaling.html). This resolves some fears about Redis being bottleneck on some large Centrifugo setups. Though we have not heard such stories yet. Redis is single-threaded server, it's insanely fast but if your Redis approaches 100% CPU usage then this sharding feature is what can help your application to scale. 
 * Many minor internal improvements.
@@ -704,7 +704,7 @@ As Centrifugo written in Go the only performant way to write plugins is to impor
 v1.5.1
 ======
 
-* Fixes [#94](https://github.com/centrifugal/centrifugo/issues).
+* Fixes [#94](https://github.com/wetix/centrifugo/issues).
 
 
 v1.5.0
@@ -740,7 +740,7 @@ v1.4.4
 
 One more fix for v1.4.2 release here
 
-* proper aliasing of `admin_password` and `admin_secret` configuration options. See [#88](https://github.com/centrifugal/centrifugo/issues/88) 
+* proper aliasing of `admin_password` and `admin_secret` configuration options. See [#88](https://github.com/wetix/centrifugo/issues/88) 
 
 
 v1.4.3
@@ -756,9 +756,9 @@ v1.4.2
 
 * Redis Sentinel support for Redis high availability setup. [Docs](https://fzambia.gitbooks.io/centrifugal/content/deploy/sentinel.html)
 * Redis Engine now uses Redis pipeline for batching publish operations - this results in latency and throughput improvments when publish rate is high.
-* Refactored admin websocket. New option `admin` to enable admin websocket. New option `insecure_admin` to make this endpoint insecure (useful when admin websocket endpoint/port protected by firewall rules). `web_password` option renamed to `admin_password`, `web_secret` option renamed to `admin_secret`, `insecure_web` renamed to `insecure_admin`. **But all old option names still supported to not break things in existing setups**. Also note, that when you run Centrifugo with `web` interface enabled - you also make admin websocket available, because web interface uses it. A little more info [in pull request](https://github.com/centrifugal/centrifugo/pull/83).
+* Refactored admin websocket. New option `admin` to enable admin websocket. New option `insecure_admin` to make this endpoint insecure (useful when admin websocket endpoint/port protected by firewall rules). `web_password` option renamed to `admin_password`, `web_secret` option renamed to `admin_secret`, `insecure_web` renamed to `insecure_admin`. **But all old option names still supported to not break things in existing setups**. Also note, that when you run Centrifugo with `web` interface enabled - you also make admin websocket available, because web interface uses it. A little more info [in pull request](https://github.com/wetix/centrifugo/pull/83).
 * Presence Redis Engine methods rewritten to lua to be atomic.
-* Some Redis connection params now can be set over environment variables. See [#81](https://github.com/centrifugal/centrifugo/issues/81)
+* Some Redis connection params now can be set over environment variables. See [#81](https://github.com/wetix/centrifugo/issues/81)
 * Fix busy loop when attempting to reconnect to Redis. Fixes large CPU usage while reconnecting.
 * Shorter message `uid`s (22 bytes instead of 36). This was made in order to get some performance improvements.
 
@@ -766,7 +766,7 @@ v1.4.2
 v1.4.1
 ======
 
-* fix server crash on 32-bit architectures (due to [this](https://golang.org/src/sync/atomic/doc.go?s=1207:1656#L36)), see more details in [#74](https://github.com/centrifugal/centrifugo/issues/74).
+* fix server crash on 32-bit architectures (due to [this](https://golang.org/src/sync/atomic/doc.go?s=1207:1656#L36)), see more details in [#74](https://github.com/wetix/centrifugo/issues/74).
 * fix compatibility with gocent introduced in v1.4.0
 
 
@@ -776,7 +776,7 @@ v1.4.0
 No backwards incompatible changes here for most usage scenarios, but look carefully on notes below.
 
 * Timers in metrics marked as deprecated. `time_api_mean`, `time_client_mean`, `time_api_max`, `time_client_max` now return 0. This was made because timer's implementation used `Timer` from `go-metrics` library that does not suit very well for Centrifugo needs - so values were mostly useless in practice. So we decided to get rid of them for now to not confuse our users.
-* New `node` API method to get information from single node. That information will contain counters without aggregation over minute interval (what `stats` method does by default). So it can be useful if your metric aggregation system can deal with non-aggregated counters over time period itself. Also note that to use this method you should send API request to each Centrifugo node separately - as this method returns current raw statistics about one node. See [issue](https://github.com/centrifugal/centrifugo/issues/68) for motivation description.
+* New `node` API method to get information from single node. That information will contain counters without aggregation over minute interval (what `stats` method does by default). So it can be useful if your metric aggregation system can deal with non-aggregated counters over time period itself. Also note that to use this method you should send API request to each Centrifugo node separately - as this method returns current raw statistics about one node. See [issue](https://github.com/wetix/centrifugo/issues/68) for motivation description.
 * Centrifugo now handles SIGTERM in addition to SIGINT and makes `shutdown` when this signal received. During shutdown Centrifugo returns 503 status code on requests to handlers and closes client connections so clients will reconnect. If shutdown finished without errors in 10 seconds interval then Centrifugo exits with status code 0 (instead of 130 before, this fixes behaviour behind `systemd` after SIGTERM received).
 * Maximum limit in bytes for client request was added. It can be changed using `client_request_max_size` config option. By default 65536 bytes (64kb).
 * Packages for 64-bit Debian, Centos and Ubuntu [hosted on packagecloud.io](https://packagecloud.io/FZambia/centrifugo). If you are using Debian 7 or 8, Centos 6 or 7, Ubuntu 14.04 or Ubuntu 16.04 - you can find packages for those linux distribution following to packagecloud. Packages will be created every time we release new Centrifugo version.
@@ -815,13 +815,13 @@ v1.3.0
 Possible backwards incompatibility here (in client side code) - see first point.
 
 * omit fields in message JSON if field contains empty value: `client` on top level, `info` on top level, `default_info` in `info` object, `channel_info` in `info` object. This also affects top level data in join/leave messages and presence data – i.e. `default_info` and `channel_info` keys not included in JSON when empty. This can require adapting your client side code a bit if you rely on these keys but for most cases this should not affect your application. But we strongly suggest to test before updating. This change allows to reduce message size. See migration notes below for more details.
-* new option `--admin_port` to bind admin websocket and web interface to separate port. [#44](https://github.com/centrifugal/centrifugo/issues/44)
-* new option `--api_port` to bind API endpoint to separate port. [#44](https://github.com/centrifugal/centrifugo/issues/44)
-* new option `--insecure_web` to use web interface without setting `web_password` and `web_secret` (for use in development or when you protected web interface by firewall rules). [#44](https://github.com/centrifugal/centrifugo/issues/44)
-* new channel option `history_drop_inactive` to drastically reduce resource usage (engine memory, messages travelling around) when you use message history. See [#50](https://github.com/centrifugal/centrifugo/issues/50)
-* new Redis engine option `--redis_api_num_shards`. This option sets a number of Redis shard queues Centrifugo will use in addition to standard `centrifugo.api` queue. This allows to increase amount of messages you can publish into Centrifugo and preserve message order in channels. See [#52](https://github.com/centrifugal/centrifugo/issues/52) and [documentation](https://fzambia.gitbooks.io/centrifugal/content/server/engines.html) for more details.
-* fix race condition resulting in client disconnections on high channel subscribe/unsubscribe rate. [#54](https://github.com/centrifugal/centrifugo/issues/54)
-* refactor `last_event_id` related stuff to prevent memory leaks on large amount of channels. [#48](https://github.com/centrifugal/centrifugo/issues/48)
+* new option `--admin_port` to bind admin websocket and web interface to separate port. [#44](https://github.com/wetix/centrifugo/issues/44)
+* new option `--api_port` to bind API endpoint to separate port. [#44](https://github.com/wetix/centrifugo/issues/44)
+* new option `--insecure_web` to use web interface without setting `web_password` and `web_secret` (for use in development or when you protected web interface by firewall rules). [#44](https://github.com/wetix/centrifugo/issues/44)
+* new channel option `history_drop_inactive` to drastically reduce resource usage (engine memory, messages travelling around) when you use message history. See [#50](https://github.com/wetix/centrifugo/issues/50)
+* new Redis engine option `--redis_api_num_shards`. This option sets a number of Redis shard queues Centrifugo will use in addition to standard `centrifugo.api` queue. This allows to increase amount of messages you can publish into Centrifugo and preserve message order in channels. See [#52](https://github.com/wetix/centrifugo/issues/52) and [documentation](https://fzambia.gitbooks.io/centrifugal/content/server/engines.html) for more details.
+* fix race condition resulting in client disconnections on high channel subscribe/unsubscribe rate. [#54](https://github.com/wetix/centrifugo/issues/54)
+* refactor `last_event_id` related stuff to prevent memory leaks on large amount of channels. [#48](https://github.com/wetix/centrifugo/issues/48)
 * send special disconnect message to client when we don't want it to reconnect to Centrifugo (at moment to client sending malformed message). 
 * pong wait handler for raw websocket to detect non responding clients.
 
@@ -893,8 +893,8 @@ v1.2.0
 
 No backwards incompatible changes here.
 
-* New `recover` option to automatically recover missed messages based on last message ID. See [pull request](https://github.com/centrifugal/centrifugo/pull/42) and [chapter in docs](https://fzambia.gitbooks.io/centrifugal/content/server/recover.html) for more information. Note that you need centrifuge-js >= v1.1.0 to use new `recover` option
-* New `broadcast` API method to send the same data into many channels. See [issue](https://github.com/centrifugal/centrifugo/issues/41) and updated [API description in docs](https://fzambia.gitbooks.io/centrifugal/content/server/api.html)
+* New `recover` option to automatically recover missed messages based on last message ID. See [pull request](https://github.com/wetix/centrifugo/pull/42) and [chapter in docs](https://fzambia.gitbooks.io/centrifugal/content/server/recover.html) for more information. Note that you need centrifuge-js >= v1.1.0 to use new `recover` option
+* New `broadcast` API method to send the same data into many channels. See [issue](https://github.com/wetix/centrifugo/issues/41) and updated [API description in docs](https://fzambia.gitbooks.io/centrifugal/content/server/api.html)
 * Dockerfile now checks SHA256 sum when downloading release zip archive.
 * release built using Go 1.5.2
 
